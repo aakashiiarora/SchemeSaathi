@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SchemeSaathi — Government Scheme & Scholarship Finder with AI-Assisted Auto-Apply</title>
+  
+  <!-- Soft Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom Soft Design Styling -->
+  <link rel="stylesheet" href="styles.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest: {
+              50: '#F0F7F4',
+              100: '#E1EFE9',
+              200: '#C3DFD3',
+              500: '#1B8A60',
+              700: '#135E41',
+              800: '#0E4832',
+              900: '#0A3424',
+              950: '#062016'
+            },
+            terracotta: {
+              50: '#FDF7F4',
+              100: '#FBF0EB',
+              500: '#E07A5F',
+              600: '#C25E2D',
+              700: '#A44D22'
+            },
+            sand: {
+              50: '#FAF8F5',
+              100: '#F5EFEB',
+              200: '#ECE3DA',
+              300: '#DFD3C5',
+              700: '#6E6458',
+              800: '#4D453C'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen text-stone-800 antialiased selection:bg-forest-100 selection:text-forest-900">
+
+  <!-- TOP BRANDING & NAVIGATION BAR -->
+  <header class="sticky top-0 z-40 glass-panel border-b border-sand-200 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo & Team CodeRush Tag -->
+      <div class="flex items-center gap-3">
+        <a href="#" class="flex items-center gap-3 group">
+          <div class="w-11 h-11 rounded-2xl bg-forest-700 text-amber-100 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
+            <!-- Graduation cap and book icon -->
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 3L1 9L12 15L21 10.09V17H23V9M5 13.18V17.18C5 19.94 8.13 22 12 22C15.87 22 19 19.94 19 17.18V13.18L12 17L5 13.18Z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-2xl font-bold tracking-tight text-forest-900">Scheme<span class="text-terracotta-600">Saathi</span></span>
+              <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-100 text-forest-800 border border-emerald-200">
+                AI + TinyFish Live
+              </span>
+            </div>
+            <p class="text-[11px] text-stone-500 font-medium">Team CodeRush · Kritical Hacks 2026</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Navigation Tabs (Role & Viewport Switcher) -->
+      <nav class="hidden md:flex items-center p-1 bg-stone-100/90 rounded-full border border-sand-200 text-xs font-semibold text-stone-600">
+        <button onclick="switchView('student')" id="nav-btn-student" class="px-4 py-2 rounded-full bg-white text-forest-800 shadow-sm transition-all flex items-center gap-1.5">
+          <span>🎓</span> <span data-i18n="navStudent">Student Finder</span>
+        </button>
+        <button onclick="switchView('tinyfish')" id="nav-btn-tinyfish" class="px-4 py-2 rounded-full hover:text-stone-900 transition-all flex items-center gap-1.5">
+          <span>🐟</span> <span data-i18n="navTinyFish">TinyFish Studio</span>
+        </button>
+        <button onclick="switchView('counselor')" id="nav-btn-counselor" class="px-4 py-2 rounded-full hover:text-stone-900 transition-all flex items-center gap-1.5">
+          <span>🏫</span> <span data-i18n="navCounselor">Counselor Portal</span>
+        </button>
+        <button onclick="switchView('economics')" id="nav-btn-economics" class="px-4 py-2 rounded-full hover:text-stone-900 transition-all flex items-center gap-1.5">
+          <span>📈</span> <span data-i18n="navEconomics">Economics & ROI</span>
+        </button>
+      </nav>
+
+      <!-- Language & Controls -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Language Switcher -->
+        <div class="relative">
+          <select id="lang-selector" onchange="changeLanguage(this.value)" class="text-xs font-semibold bg-white border border-sand-200 rounded-full px-3 py-1.5 pr-7 text-stone-700 shadow-sm cursor-pointer appearance-none hover:border-forest-500 transition-colors focus:ring-2 focus:ring-forest-500">
+            <option value="en">English (EN)</option>
+            <option value="hi">हिन्दी (Hindi)</option>
+            <option value="ta">தமிழ் (Tamil)</option>
+            <option value="bn">বাংলা (Bengali)</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-2 flex items-center text-stone-400">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+        </div>
+
+        <!-- My Applications Drawer Toggle -->
+        <button onclick="openApplicationsModal()" class="relative p-2 sm:px-3 sm:py-1.5 rounded-full bg-forest-50 hover:bg-forest-100 text-forest-800 border border-forest-200 text-xs font-semibold flex items-center gap-1.5 transition-all">
+          <svg class="w-4 h-4 text-forest-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          <span class="hidden sm:inline">My Tracker</span>
+          <span id="applied-count-badge" class="w-5 h-5 rounded-full bg-forest-700 text-white text-[10px] flex items-center justify-center font-bold">1</span>
+        </button>
+
+        <!-- Saathi AI Copilot Button -->
+        <button onclick="toggleSaathiChat()" class="btn-forest px-3.5 py-1.5 text-xs flex items-center gap-1.5 shadow-sm">
+          <svg class="w-3.5 h-3.5 text-amber-300" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          <span>Saathi AI</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- ========================================== -->
+    <!-- VIEW 1: STUDENT SCHOLARSHIP FINDER (DEFAULT) -->
+    <!-- ========================================== -->
+    <section id="view-student" class="space-y-12 block">
+      
+      <!-- HERO BANNER & NATURAL LANGUAGE INPUT -->
+      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-b from-[#FAF4EC] via-[#F6EFE5] to-[#FAF8F5] border border-stone-200/80 p-6 sm:p-10 shadow-sm">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-forest-100/90 text-forest-800 border border-forest-200 text-xs font-semibold mb-4">
+            <span class="w-2 h-2 rounded-full bg-forest-600 animate-ping"></span>
+            <span data-i18n="heroPill">Deterministic Rule Engine + TinyFish Live Web Agent</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-forest-950 font-serif-soft mb-3 leading-tight" data-i18n="heroTitle">
+            Find every scholarship you qualify for
+          </h1>
+
+          <p class="text-base sm:text-lg text-stone-600 font-normal mb-8 max-w-2xl leading-relaxed" data-i18n="heroSubtitle">
+            Tell us about yourself once. Our agent checks the portals and prepares your application. You stay in control.
+          </p>
+
+          <!-- NLP Prompt Box with Voice Input & Pre-fill -->
+          <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-lg border border-stone-200/90 space-y-4">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <label for="nl-prompt" class="text-xs font-bold uppercase tracking-wider text-stone-500">
+                  Tell us in your own words (or speak in Hindi/English)
+                </label>
+                <span class="text-[11px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-medium">
+                  AI Entity Extractor Active
+                </span>
+              </div>
+
+              <div class="relative">
+                <textarea id="nl-prompt" rows="2" 
+                  class="w-full text-stone-800 text-sm sm:text-base p-3.5 bg-stone-50/70 border border-amber-200/90 rounded-xl resize-none focus:bg-white transition-all font-medium"
+                  placeholder="e.g. I am a girl in B.Tech, SC category, family income 2 lakh, 85% marks from Delhi"></textarea>
+              </div>
+            </div>
+
+            <!-- Speech & Quick Chips Row -->
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+              <div class="flex items-center gap-2">
+                <!-- Speak Button -->
+                <button type="button" id="btn-voice-input" onclick="toggleVoiceInput()" 
+                  class="px-4 py-2 rounded-full bg-white text-forest-700 border-2 border-forest-600 hover:bg-forest-50 text-xs sm:text-sm font-bold flex items-center gap-2 transition-all shadow-sm">
+                  <svg id="mic-icon" class="w-4 h-4 text-forest-700" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 14C13.66 14 15 12.66 15 11V5C15 3.34 13.66 2 12 2C10.34 2 9 3.34 9 5V11C9 12.66 10.34 14 12 14ZM10.8 4.9C10.8 4.24 11.34 3.7 12 3.7C12.66 3.7 13.2 4.24 13.2 4.9V11.1C13.2 11.76 12.66 12.3 12 12.3C11.34 12.3 10.8 11.76 10.8 11.1V4.9ZM17.3 11C17.3 14 14.76 16.1 12 16.1C9.24 16.1 6.7 14 6.7 11H5C5 14.41 7.72 17.23 11 17.72V21H13V17.72C16.28 17.23 19 14.41 19 11H17.3Z"/>
+                  </svg>
+                  <span id="voice-label" data-i18n="speakBtn">Speak</span>
+                </button>
+
+                <!-- Parse AI Button -->
+                <button type="button" onclick="handleAutoExtractNLP()" 
+                  class="px-3.5 py-2 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold flex items-center gap-1.5 transition-colors">
+                  <span>✨</span> Auto-Fill Profile
+                </button>
+              </div>
+
+              <!-- Quick Query Presets -->
+              <div class="flex items-center gap-1.5 overflow-x-auto text-[11px] text-stone-600">
+                <span class="text-stone-400 font-medium">Try:</span>
+                <button type="button" onclick="setPresetQuery('girl-btech-sc')" class="px-2.5 py-1 bg-stone-100 hover:bg-stone-200 rounded-lg whitespace-nowrap transition-colors">
+                  B.Tech Girl SC
+                </button>
+                <button type="button" onclick="setPresetQuery('diploma-obc')" class="px-2.5 py-1 bg-stone-100 hover:bg-stone-200 rounded-lg whitespace-nowrap transition-colors">
+                  Diploma OBC
+                </button>
+                <button type="button" onclick="setPresetQuery('minority-girl')" class="px-2.5 py-1 bg-stone-100 hover:bg-stone-200 rounded-lg whitespace-nowrap transition-colors">
+                  Minority Girl
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Decorative Floral/Botanical Watermark (Matching presentation aesthetic) -->
+        <div class="absolute -right-8 -bottom-12 w-64 h-64 opacity-20 pointer-events-none text-forest-700">
+          <svg viewBox="0 0 200 200" fill="currentColor">
+            <path d="M100,15 C120,45 155,50 185,70 C155,90 150,125 130,155 C110,125 75,130 45,110 C75,90 80,55 100,15 Z" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- STRUCTURED PROFILE FILTER FORM (From the Prototype in Slides) -->
+      <div class="soft-card p-6 sm:p-8 bg-white border border-stone-200">
+        <div class="flex items-center justify-between pb-5 border-b border-stone-100 mb-6">
+          <div>
+            <h2 class="text-lg font-bold text-stone-900 flex items-center gap-2">
+              <span>👤</span> Structured Student Profile
+            </h2>
+            <p class="text-xs text-stone-500">Deterministic parameters evaluated against central and state scholarship gazettes</p>
+          </div>
+          <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-forest-50 text-forest-800 border border-forest-200">
+            Auto-synced with NLP
+          </span>
+        </div>
+
+        <form id="profile-form" onsubmit="event.preventDefault(); triggerSchemeSearch();" class="space-y-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            
+            <!-- Full Name -->
+            <div>
+              <label class="block text-xs font-bold text-stone-600 uppercase mb-1.5" data-i18n="fullName">Full name</label>
+              <input type="text" id="input-fullname" value="RIYA" 
+                class="w-full px-3.5 py-2.5 bg-stone-50/70 border border-stone-200 rounded-xl text-sm font-semibold text-stone-800 focus:bg-white transition-all">
+            </div>
+
+            <!-- Course Level -->
+            <div>
+              <label class="block text-xs font-bold text-stone-600 uppercase mb-1.5" data-i18n="courseLevel">Course level</label>
+              <select id="input-course" class="w-full px-3.5 py-2.5 bg-stone-50/70 border border-stone-200 rounded-xl text-sm font-semibold text-stone-800 focus:bg-white transition-all cursor-pointer">
+                <option value="Undergraduate" selected>Undergraduate (B.Tech, B.Sc, MBBS)</option>
+                <option value="Higher Secondary">Higher Secondary (Class 11 - 12)</option>
+                <option value="Diploma">Diploma / Polytechnic</option>
+                <option value="Postgraduate">Postgraduate (M.Tech, M.Sc, MBA)</option>
+              </select>
+            </div>
+
+            <!-- State -->
+            <div>
+              <label class="block text-xs font-bold text-stone-600 uppercase mb-1.5" data-i18n="state">State</label>
+              <select id="input-state" class="w-full px-3.5 py-2.5 bg-stone-50/70 border border-stone-200 rounded-xl text-sm font-semibold text-stone-800 focus:bg-white transition-all cursor-pointer">
+                <option value="Delhi" selected>Delhi</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Bihar">Bihar</option>
+                <option value="West Bengal">West Bengal</option>
+                <option value="All">Other States (All-India)</option>
+              </select>
+            </div>
+
+            <!-- Category -->
+            <div>
+              <label class="block text-xs font-bold text-stone-600 uppercase mb-1.5" data-i18n="category">Category</label>
+              <select id="input-category" class="w-full px-3.5 py-2.5 bg-stone-50/70 border border-stone-200 rounded-xl text-sm font-semibold text-stone-800 focus:bg-white transition-all cursor-pointer">
+                <option value="SC" selected>SC (Scheduled Caste)</option>
+                <option value="ST">ST (Scheduled Tribe)</option>
+                <option value="OBC">OBC (Other Backward Class)</option>
+                <option value="General">General</option>
+                <option value="EWS">EWS (Economically Weaker)</option>
+                <option value="Minority">Minority (Notified 6)</option>
+              </select>
+            </div>
+
+            <!-- Gender -->
+            <div>
+              <label class="block text-xs font-bold text-stone-600 uppercase mb-1.5" data-i18n="gender">Gender</label>
+              <select id="input-gender" class="w-full px-3.5 py-2.5 bg-stone-50/70 border border-stone-200 rounded-xl text-sm font-semibold text-stone-800 focus:bg-white transition-all cursor-pointer">
+                <option value="Female" selected>Female</option>
+                <option value="Male">Male</option>
+                <option value="Other">Other / Transgender</option>
+              </select>
+            </div>
+
+            <!-- Family Income -->
+            <div>
+              <label class="block text-xs font-bold text-stone-600 uppercase mb-1.5" data-i18n="income">Family income per year (₹)</label>
+              <input type="number" id="input-income" value="400000" step="25000"
+                class="w-full px-3.5 py-2.5 bg-stone-50/70 border border-stone-200 rounded-xl text-sm font-semibold text-stone-800 focus:bg-white transition-all">
+            </div>
+
+            <!-- Last Exam Marks -->
+            <div>
+              <label class="block text-xs font-bold text-stone-600 uppercase mb-1.5" data-i18n="marks">Last exam marks (%)</label>
+              <input type="number" id="input-marks" value="95" min="35" max="100"
+                class="w-full px-3.5 py-2.5 bg-stone-50/70 border border-stone-200 rounded-xl text-sm font-semibold text-stone-800 focus:bg-white transition-all">
+            </div>
+
+            <!-- Special Indicators -->
+            <div class="flex flex-col justify-end pb-1 space-y-2">
+              <label class="inline-flex items-center gap-2 cursor-pointer text-xs font-medium text-stone-700">
+                <input type="checkbox" id="check-single-girl" checked class="w-4 h-4 rounded text-forest-700 focus:ring-forest-500">
+                <span>Single girl child in family</span>
+              </label>
+              <label class="inline-flex items-center gap-2 cursor-pointer text-xs font-medium text-stone-700">
+                <input type="checkbox" id="check-first-gen" checked class="w-4 h-4 rounded text-forest-700 focus:ring-forest-500">
+                <span>First-generation graduate</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="pt-2 flex justify-start">
+            <button type="submit" class="btn-forest px-8 py-3.5 text-sm sm:text-base font-bold flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+              <span data-i18n="findBtn">Find my schemes</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- RANKED MATCHES CONTAINER (Directly replicating the Slide UI) -->
+      <div class="space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-stone-200">
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-forest-950 font-serif-soft" data-i18n="matchedHeading">
+              Your ranked matches
+            </h2>
+            <p id="match-stats-sub" class="text-xs sm:text-sm text-stone-500 font-medium">
+              6 schemes checked · 3 matched. Sorted by fit, benefit and deadline.
+            </p>
+          </div>
+
+          <!-- Filter tags -->
+          <div class="flex items-center gap-2 overflow-x-auto text-xs font-medium">
+            <span class="text-stone-400">Filter:</span>
+            <button onclick="filterSchemes('all')" class="px-3 py-1 rounded-full bg-forest-700 text-white font-semibold">All</button>
+            <button onclick="filterSchemes('central')" class="px-3 py-1 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-700">Central</button>
+            <button onclick="filterSchemes('state')" class="px-3 py-1 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-700">State</button>
+            <button onclick="filterSchemes('urgent')" class="px-3 py-1 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-700">Closing Soon</button>
+          </div>
+        </div>
+
+        <!-- Dynamic List of Cards -->
+        <div id="schemes-list" class="space-y-4">
+          <!-- Populated by renderSchemes() -->
+        </div>
+      </div>
+
+      <!-- THE 6 DROP-OFF STEPS INTERACTIVE RADIAL (Slide 2 Visual) -->
+      <div class="soft-card p-6 sm:p-10 bg-white border border-stone-200 space-y-8">
+        <div class="text-center max-w-2xl mx-auto">
+          <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 bg-terracotta-50 px-3 py-1 rounded-full border border-terracotta-100">
+            The Fundamental Problem
+          </span>
+          <h3 class="text-2xl sm:text-3xl font-extrabold text-forest-950 font-serif-soft mt-3">
+            Benefits exist. Eligible people still miss them.
+          </h3>
+          <p class="text-sm text-stone-600 mt-2">
+            Schemes are scattered across portals, formats and languages, so a first-generation student can lose out at any one of six steps.
+          </p>
+          <div class="mt-3 flex items-center justify-center gap-2 text-xs font-bold text-stone-500">
+            <span>A missed scholarship can cost:</span>
+            <span class="text-stone-800 bg-stone-100 px-2 py-0.5 rounded">Fees</span>
+            <span class="text-stone-800 bg-stone-100 px-2 py-0.5 rounded">Books</span>
+            <span class="text-stone-800 bg-stone-100 px-2 py-0.5 rounded">Transport</span>
+            <span class="text-stone-800 bg-stone-100 px-2 py-0.5 rounded">Hostel</span>
+          </div>
+        </div>
+
+        <!-- 6-Node Grid with Solution Popovers -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          
+          <div class="p-5 rounded-2xl border-2 border-stone-200 hover:border-forest-600 bg-stone-50/50 hover:bg-white transition-all cursor-pointer group" onclick="showPainPointModal(1)">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="w-7 h-7 rounded-full bg-terracotta-100 text-terracotta-700 font-bold text-xs flex items-center justify-center">1</span>
+              <h4 class="font-bold text-stone-900 group-hover:text-forest-800 transition-colors">Never learns it exists</h4>
+            </div>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              Information scattered across 100+ ministries. Students don't know where to look.
+            </p>
+            <div class="mt-3 pt-3 border-t border-stone-200/60 text-[11px] font-semibold text-forest-700 flex items-center gap-1">
+              <span>Fix: TinyFish Web Radar</span>
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl border-2 border-stone-200 hover:border-forest-600 bg-stone-50/50 hover:bg-white transition-all cursor-pointer group" onclick="showPainPointModal(2)">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="w-7 h-7 rounded-full bg-terracotta-100 text-terracotta-700 font-bold text-xs flex items-center justify-center">2</span>
+              <h4 class="font-bold text-stone-900 group-hover:text-forest-800 transition-colors">Assumes they don't qualify</h4>
+            </div>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              Confusing gazette jargon leads students to mistakenly disqualify themselves.
+            </p>
+            <div class="mt-3 pt-3 border-t border-stone-200/60 text-[11px] font-semibold text-forest-700 flex items-center gap-1">
+              <span>Fix: Deterministic Rule Engine</span>
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl border-2 border-stone-200 hover:border-forest-600 bg-stone-50/50 hover:bg-white transition-all cursor-pointer group" onclick="showPainPointModal(3)">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="w-7 h-7 rounded-full bg-terracotta-100 text-terracotta-700 font-bold text-xs flex items-center justify-center">3</span>
+              <h4 class="font-bold text-stone-900 group-hover:text-forest-800 transition-colors">Misses the deadline</h4>
+            </div>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              Window opens silently for only 15-30 days each year without notice.
+            </p>
+            <div class="mt-3 pt-3 border-t border-stone-200/60 text-[11px] font-semibold text-forest-700 flex items-center gap-1">
+              <span>Fix: Proactive WhatsApp Alerts</span>
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl border-2 border-stone-200 hover:border-forest-600 bg-stone-50/50 hover:bg-white transition-all cursor-pointer group" onclick="showPainPointModal(4)">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="w-7 h-7 rounded-full bg-terracotta-100 text-terracotta-700 font-bold text-xs flex items-center justify-center">4</span>
+              <h4 class="font-bold text-stone-900 group-hover:text-forest-800 transition-colors">Uploads the wrong document</h4>
+            </div>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              Expired income proof, blurred scans, or minor spelling discrepancies reject files.
+            </p>
+            <div class="mt-3 pt-3 border-t border-stone-200/60 text-[11px] font-semibold text-forest-700 flex items-center gap-1">
+              <span>Fix: OCR Error & Expiry Inspector</span>
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl border-2 border-stone-200 hover:border-forest-600 bg-stone-50/50 hover:bg-white transition-all cursor-pointer group" onclick="showPainPointModal(5)">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="w-7 h-7 rounded-full bg-terracotta-100 text-terracotta-700 font-bold text-xs flex items-center justify-center">5</span>
+              <h4 class="font-bold text-stone-900 group-hover:text-forest-800 transition-colors">Fails later verification</h4>
+            </div>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              Gets stuck at School Nodal Officer or District Level with no tracking visibility.
+            </p>
+            <div class="mt-3 pt-3 border-t border-stone-200/60 text-[11px] font-semibold text-forest-700 flex items-center gap-1">
+              <span>Fix: End-to-End Status Lifecycle</span>
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl border-2 border-stone-200 hover:border-forest-600 bg-stone-50/50 hover:bg-white transition-all cursor-pointer group" onclick="showPainPointModal(6)">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="w-7 h-7 rounded-full bg-terracotta-100 text-terracotta-700 font-bold text-xs flex items-center justify-center">6</span>
+              <h4 class="font-bold text-stone-900 group-hover:text-forest-800 transition-colors">Low digital access</h4>
+            </div>
+            <p class="text-xs text-stone-600 leading-relaxed">
+              Complex desktop-only government forms fail on cheap mobile phones or slow 3G.
+            </p>
+            <div class="mt-3 pt-3 border-t border-stone-200/60 text-[11px] font-semibold text-forest-700 flex items-center gap-1">
+              <span>Fix: Multilingual Voice & Counselor Mode</span>
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 2: TINYFISH LIVE-WEB RADAR & AGENT STUDIO -->
+    <!-- ========================================== -->
+    <section id="view-tinyfish" class="space-y-8 hidden">
+      <div class="soft-card p-6 sm:p-10 bg-white border border-stone-200 space-y-6">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-forest-800 text-xs font-semibold mb-3">
+            <span>🐟</span> Live-Web Layer for Government Portals
+          </div>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-forest-950 font-serif-soft" data-i18n="tinyFishTitle">
+            TinyFish Live-Web Radar & Agent Studio
+          </h2>
+          <p class="text-sm sm:text-base text-stone-600 max-w-3xl mt-2 leading-relaxed" data-i18n="tinyFishSub">
+            TinyFish acts as the live-web automation layer for SchemeSaathi. It bridges static rules with dynamic, messy government portals using Search, Fetch, Agent, and Browser APIs.
+          </p>
+        </div>
+
+        <!-- 4 API Pillars of TinyFish -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="p-4 rounded-2xl bg-stone-50 border border-stone-200 space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">
+              TS
+            </div>
+            <h4 class="font-bold text-stone-900 text-sm">TinySearch</h4>
+            <p class="text-xs text-stone-600">
+              Discovers official scheme pages, notifications, and revised deadline gazettes across .gov.in domains.
+            </p>
+            <span class="inline-block text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Free quota tier</span>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-stone-50 border border-stone-200 space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">
+              TF
+            </div>
+            <h4 class="font-bold text-stone-900 text-sm">TinyFetch</h4>
+            <p class="text-xs text-stone-600">
+              Extracts clean text, structured tables, and eligibility JSON from official HTML pages and PDF gazettes.
+            </p>
+            <span class="inline-block text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Free within limits</span>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-stone-50 border border-stone-200 space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-emerald-800 text-white flex items-center justify-center font-bold text-xs">
+              TA
+            </div>
+            <h4 class="font-bold text-stone-900 text-sm">TinyAgent</h4>
+            <p class="text-xs text-stone-600">
+              Navigates portals, extracts status updates, and handles permitted form pre-filling workflows safely.
+            </p>
+            <span class="inline-block text-[10px] font-bold text-stone-700 bg-stone-200 px-2 py-0.5 rounded">$0.016 / step</span>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-stone-50 border border-stone-200 space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-emerald-900 text-white flex items-center justify-center font-bold text-xs">
+              TB
+            </div>
+            <h4 class="font-bold text-stone-900 text-sm">TinyBrowser</h4>
+            <p class="text-xs text-stone-600">
+              Manages JavaScript-heavy or complex ASP.NET portal sessions, CAPTCHA rendering, and session cookies.
+            </p>
+            <span class="inline-block text-[10px] font-bold text-stone-700 bg-stone-200 px-2 py-0.5 rounded">Metered per minute</span>
+          </div>
+        </div>
+
+        <!-- Interactive Live Probe Simulator -->
+        <div class="rounded-2xl border border-stone-200 bg-stone-900 p-5 text-emerald-400 space-y-4 shadow-xl">
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-stone-800 pb-3">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-red-500"></span>
+              <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+              <span class="w-3 h-3 rounded-full bg-green-500"></span>
+              <span class="font-mono text-xs text-stone-400 ml-2">tinyfish-agent-session://nsp-portal-probe</span>
+            </div>
+
+            <!-- Run Button -->
+            <button id="btn-run-tinyfish" onclick="runTinyFishSimulation()" class="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-bold transition-all flex items-center gap-2">
+              <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <span>Run Live TinyFish Portal Probe</span>
+            </button>
+          </div>
+
+          <!-- Console Stream Window -->
+          <div id="tinyfish-console-logs" class="font-mono text-xs space-y-3 min-h-[220px] max-h-[340px] overflow-y-auto pr-2 text-stone-300">
+            <div class="text-stone-500">// Ready. Click "Run Live TinyFish Portal Probe" to observe end-to-end web extraction and safe auto-fill execution.</div>
+          </div>
+
+          <!-- Live Cost Counter Ribbon -->
+          <div class="pt-3 border-t border-stone-800 flex flex-wrap items-center justify-between text-xs text-stone-400 font-mono">
+            <div>Agent Steps: <span id="tf-step-counter" class="text-emerald-400 font-bold">0</span> / 40 steps</div>
+            <div>Simulated Run Cost: <span id="tf-cost-counter" class="text-amber-400 font-bold">$0.00 (₹0.00)</span></div>
+            <div class="text-emerald-400 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              Safe Auto-Apply Enforcement: ON
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 3: COUNSELOR & INSTITUTIONAL PORTAL -->
+    <!-- ========================================== -->
+    <section id="view-counselor" class="space-y-8 hidden">
+      <div class="soft-card p-6 sm:p-10 bg-white border border-stone-200 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-semibold mb-2">
+              <span>🏫</span> Institutional Dashboard
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-forest-950 font-serif-soft">
+              Delhi Govt Model Senior Secondary School — Counselor Hub
+            </h2>
+            <p class="text-xs sm:text-sm text-stone-500">
+              Assisted onboarding copilot for schools, colleges, CSCs, and NGOs.
+            </p>
+          </div>
+
+          <!-- Bulk WhatsApp Nudge Button -->
+          <button onclick="simulateBulkNudge()" class="btn-forest px-4 py-2 text-xs font-bold flex items-center gap-2 self-start sm:self-auto">
+            <span>📲</span> Send Bulk WhatsApp Reminders (5 Pending)
+          </button>
+        </div>
+
+        <!-- Metric KPI Cards -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div class="p-4 rounded-2xl bg-stone-50 border border-stone-200">
+            <span class="text-xs text-stone-500 font-medium">Enrolled Students</span>
+            <div class="text-2xl font-bold text-stone-900 mt-1">248</div>
+            <span class="text-[10px] text-emerald-700 font-semibold">100% profiled</span>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-stone-50 border border-stone-200">
+            <span class="text-xs text-stone-500 font-medium">Eligible Benefits</span>
+            <div class="text-2xl font-bold text-forest-700 mt-1">₹46.8 Lakh</div>
+            <span class="text-[10px] text-emerald-700 font-semibold">Across 4 schemes</span>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-stone-50 border border-stone-200">
+            <span class="text-xs text-stone-500 font-medium">Applications Submitted</span>
+            <div class="text-2xl font-bold text-stone-900 mt-1">182</div>
+            <span class="text-[10px] text-amber-600 font-semibold">73.4% completion</span>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-stone-50 border border-stone-200">
+            <span class="text-xs text-stone-500 font-medium">Disbursed (DBT)</span>
+            <div class="text-2xl font-bold text-emerald-700 mt-1">₹31.2 Lakh</div>
+            <span class="text-[10px] text-stone-500">Zero rejections</span>
+          </div>
+        </div>
+
+        <!-- Student Roster Table -->
+        <div class="overflow-x-auto rounded-2xl border border-stone-200">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-stone-100 text-stone-700 font-bold uppercase tracking-wider">
+              <tr>
+                <th class="p-3.5">Student Name</th>
+                <th class="p-3.5">Category</th>
+                <th class="p-3.5">Matched Scheme</th>
+                <th class="p-3.5">Benefit</th>
+                <th class="p-3.5">Deadline</th>
+                <th class="p-3.5">Status</th>
+                <th class="p-3.5 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-stone-200 font-medium text-stone-800">
+              <tr class="hover:bg-stone-50 transition-colors">
+                <td class="p-3.5 font-bold">Riya Kumari (Roll: 104)</td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-purple-50 text-purple-700 border border-purple-200 font-semibold">SC</span></td>
+                <td class="p-3.5">AICTE Pragati for Girls</td>
+                <td class="p-3.5 text-emerald-700 font-bold">₹50,000</td>
+                <td class="p-3.5 text-red-600 font-bold">24 Oct (5d left)</td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold">In Verification</span></td>
+                <td class="p-3.5 text-right">
+                  <button class="px-2.5 py-1 rounded bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold">Inspect</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-stone-50 transition-colors">
+                <td class="p-3.5 font-bold">Aman Verma (Roll: 112)</td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200 font-semibold">OBC</span></td>
+                <td class="p-3.5">PM-YASASVI Post-Matric</td>
+                <td class="p-3.5 text-emerald-700 font-bold">₹45,000</td>
+                <td class="p-3.5 text-stone-600">20 Nov (32d)</td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-semibold">Missing Marksheet</span></td>
+                <td class="p-3.5 text-right">
+                  <button onclick="alert('Nudge sent to Aman via WhatsApp!')" class="px-2.5 py-1 rounded bg-forest-100 hover:bg-forest-200 text-forest-800 font-semibold">WhatsApp Nudge</button>
+                </td>
+              </tr>
+              <tr class="hover:bg-stone-50 transition-colors">
+                <td class="p-3.5 font-bold">Farzana Parveen (Roll: 118)</td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold">Minority</span></td>
+                <td class="p-3.5">Begum Hazrat Mahal</td>
+                <td class="p-3.5 text-emerald-700 font-bold">₹12,000</td>
+                <td class="p-3.5 text-stone-600">13 Nov (25d)</td>
+                <td class="p-3.5"><span class="px-2 py-0.5 rounded-full bg-green-100 text-green-800 font-semibold">DBT Disbursed</span></td>
+                <td class="p-3.5 text-right">
+                  <button class="px-2.5 py-1 rounded bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold">Receipt</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 4: ECONOMICS, PRICING & ROI CALCULATOR -->
+    <!-- ========================================== -->
+    <section id="view-economics" class="space-y-8 hidden">
+      <div class="soft-card p-6 sm:p-10 bg-white border border-stone-200 space-y-8">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-forest-800 text-xs font-semibold mb-2">
+            <span>📊</span> Unit Economics & B2B2C Financial Architecture
+          </div>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-forest-950 font-serif-soft" data-i18n="unitEcoTitle">
+            Price Economics: Under ₹200 to fully assist one application
+          </h2>
+          <p class="text-sm sm:text-base text-stone-600 max-w-3xl mt-2 leading-relaxed" data-i18n="unitEcoSub">
+            ₹10 crore of benefits unlocked when 10,000 students access an average ₹10,000 scholarship. Free for students, funded by institutions and CSR impact partners.
+          </p>
+        </div>
+
+        <!-- Breakdown Component (Slide 7 Data) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- Cost Breakdown Card -->
+          <div class="p-6 rounded-2xl bg-stone-50 border border-stone-200 space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-bold text-stone-900 text-sm">Unit Cost Per Fully Assisted Application</h3>
+              <span class="text-xs font-extrabold px-3 py-1 bg-forest-700 text-white rounded-full">₹94 – ₹195</span>
+            </div>
+            <p class="text-xs text-stone-500">
+              About ₹64–₹95 with pure AI automation, up to ₹195 when optional expert human counselor review is included.
+            </p>
+
+            <div class="space-y-3 pt-2">
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-stone-700 mb-1">
+                  <span>TinyFish Agent (40 steps × $0.016)</span>
+                  <span class="font-bold">₹55 – ₹60</span>
+                </div>
+                <div class="w-full h-2 bg-stone-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-forest-600 rounded-full" style="width: 35%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-stone-700 mb-1">
+                  <span>LLM RAG Explanation, Matching & Document Checks</span>
+                  <span class="font-bold">₹5 – ₹20</span>
+                </div>
+                <div class="w-full h-2 bg-stone-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-forest-500 rounded-full" style="width: 15%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-stone-700 mb-1">
+                  <span>OCR & Document Processing (Tesseract / Vision)</span>
+                  <span class="font-bold">₹2 – ₹10</span>
+                </div>
+                <div class="w-full h-2 bg-stone-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-amber-500 rounded-full" style="width: 10%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-stone-700 mb-1">
+                  <span>Cloud, Storage & Proactive WhatsApp Notifications</span>
+                  <span class="font-bold">₹2 – ₹5</span>
+                </div>
+                <div class="w-full h-2 bg-stone-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-blue-500 rounded-full" style="width: 8%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-stone-700 mb-1">
+                  <span>Optional Human Review for Complex Cases</span>
+                  <span class="font-bold">₹30 – ₹100</span>
+                </div>
+                <div class="w-full h-2 bg-stone-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-stone-400 rounded-full" style="width: 32%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- B2B2C Revenue Streams (Slide 8 Data) -->
+          <div class="p-6 rounded-2xl bg-stone-50 border border-stone-200 space-y-4">
+            <h3 class="font-bold text-stone-900 text-sm">B2B2C Revenue Model (Students Never Pay)</h3>
+            <div class="space-y-2.5 text-xs">
+              <div class="p-2.5 rounded-xl bg-white border border-stone-200/80 flex justify-between items-center">
+                <div>
+                  <div class="font-bold text-stone-900">Schools & Colleges SaaS</div>
+                  <div class="text-stone-500">Counselor dashboards & compliance tracking</div>
+                </div>
+                <span class="font-bold text-forest-800">₹1–5 Lakh/yr</span>
+              </div>
+
+              <div class="p-2.5 rounded-xl bg-white border border-stone-200/80 flex justify-between items-center">
+                <div>
+                  <div class="font-bold text-stone-900">Government Portals</div>
+                  <div class="text-stone-500">White-label portals & district-level analytics</div>
+                </div>
+                <span class="font-bold text-forest-800">₹10 Lakh – ₹1 Cr+</span>
+              </div>
+
+              <div class="p-2.5 rounded-xl bg-white border border-stone-200/80 flex justify-between items-center">
+                <div>
+                  <div class="font-bold text-stone-900">CSR & Foundations</div>
+                  <div class="text-stone-500">Outcome-based fee per completed application</div>
+                </div>
+                <span class="font-bold text-forest-800">₹5–50 Lakh / program</span>
+              </div>
+
+              <div class="p-2.5 rounded-xl bg-white border border-stone-200/80 flex justify-between items-center">
+                <div>
+                  <div class="font-bold text-stone-900">API & Data Licensing</div>
+                  <div class="text-stone-500">Eligibility checks for edtechs, banks & jobs</div>
+                </div>
+                <span class="font-bold text-forest-800">₹1–₹10 / check</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Interactive ROI Simulator -->
+        <div class="p-6 sm:p-8 rounded-3xl bg-forest-900 text-white space-y-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-xl font-bold font-serif-soft">Interactive Social ROI & Unlock Calculator</h3>
+              <p class="text-xs text-forest-200">Adjust parameters to see the unlock multiple for Indian students</p>
+            </div>
+            <span class="text-xs font-mono px-3 py-1 rounded-full bg-forest-800 text-amber-300 border border-forest-700">
+              Unit Economics V1
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div class="space-y-4">
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-forest-200">Active Students</span>
+                  <span id="slider-students-val" class="font-bold text-amber-300 font-mono">10,000 students</span>
+                </div>
+                <input type="range" id="slider-students" min="1000" max="50000" step="1000" value="10000" 
+                  oninput="calculateEconomics()" class="w-full">
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-forest-200">Average Scholarship Benefit</span>
+                  <span id="slider-benefit-val" class="font-bold text-amber-300 font-mono">₹10,000 / student</span>
+                </div>
+                <input type="range" id="slider-benefit" min="5000" max="50000" step="2500" value="10000" 
+                  oninput="calculateEconomics()" class="w-full">
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span class="text-forest-200">Assisted Application Rate</span>
+                  <span id="slider-rate-val" class="font-bold text-amber-300 font-mono">75%</span>
+                </div>
+                <input type="range" id="slider-rate" min="20" max="100" step="5" value="75" 
+                  oninput="calculateEconomics()" class="w-full">
+              </div>
+            </div>
+
+            <!-- Dynamic Outputs Card -->
+            <div class="p-5 rounded-2xl bg-forest-950/80 border border-forest-800/80 space-y-4 text-center">
+              <div>
+                <span class="text-xs uppercase tracking-wider text-forest-300 font-bold">Total Benefits Unlocked</span>
+                <div id="eco-total-benefit" class="text-3xl sm:text-4xl font-extrabold text-amber-300 mt-1 font-mono">
+                  ₹10.0 Crore
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3 pt-3 border-t border-forest-800/80 text-left">
+                <div>
+                  <span class="text-[11px] text-forest-300">TinyFish & AI Cost</span>
+                  <div id="eco-total-cost" class="text-base font-bold text-white font-mono">₹10.8 Lakh</div>
+                </div>
+                <div>
+                  <span class="text-[11px] text-forest-300">Social ROI Multiple</span>
+                  <div id="eco-roi-multiplier" class="text-base font-bold text-emerald-400 font-mono">92.6x return</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================== -->
+  <!-- MODAL: SAFE "AUTO-APPLY" WORKFLOW (Slide 6) -->
+  <!-- ========================================== -->
+  <div id="modal-auto-apply" class="fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-stone-200 flex flex-col">
+      
+      <!-- Modal Header -->
+      <div class="p-6 border-b border-stone-100 flex items-center justify-between sticky top-0 bg-white/95 backdrop-blur-md z-10">
+        <div>
+          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-forest-800 border border-emerald-200">
+            Safe Auto-Apply Protocol
+          </span>
+          <h3 id="modal-scheme-title" class="text-lg sm:text-xl font-bold text-stone-900 mt-1">
+            AICTE Pragati Scholarship for Girls
+          </h3>
+        </div>
+        <button onclick="closeAutoApplyModal()" class="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-stone-500 font-bold">
+          ✕
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 space-y-6 text-sm">
+        
+        <!-- Safety Alert -->
+        <div class="p-4 rounded-2xl bg-amber-50/80 border border-amber-200 flex items-start gap-3">
+          <svg class="w-5 h-5 text-amber-600 mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L1 21H23L12 2ZM12 6L19.53 19H4.47L12 6ZM11 10V14H13V10H11ZM11 16V18H13V16H11Z"/></svg>
+          <div class="text-xs text-amber-900 leading-relaxed">
+            <strong class="font-bold">Zero Silent Submissions:</strong> SchemeSaathi pre-fills official portal fields and checks your documents. You must review every field below and provide explicit confirmation before final portal dispatch.
+          </div>
+        </div>
+
+        <!-- Pre-filled Data Summary -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-xs uppercase tracking-wider text-stone-500">1. Pre-Filled Verified Profile Data</h4>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4 bg-stone-50 rounded-2xl border border-stone-200 text-xs">
+            <div>
+              <span class="text-stone-400 block">Applicant Name</span>
+              <span id="modal-field-name" class="font-bold text-stone-800">RIYA</span>
+            </div>
+            <div>
+              <span class="text-stone-400 block">Category</span>
+              <span id="modal-field-category" class="font-bold text-stone-800">SC</span>
+            </div>
+            <div>
+              <span class="text-stone-400 block">Declared Income</span>
+              <span id="modal-field-income" class="font-bold text-stone-800">₹4,00,000 / yr</span>
+            </div>
+            <div>
+              <span class="text-stone-400 block">Course Level</span>
+              <span id="modal-field-course" class="font-bold text-stone-800">Undergraduate (B.Tech)</span>
+            </div>
+            <div>
+              <span class="text-stone-400 block">Academic Score</span>
+              <span id="modal-field-marks" class="font-bold text-emerald-700">95% (Merit tier)</span>
+            </div>
+            <div>
+              <span class="text-stone-400 block">Bank Account (DBT)</span>
+              <span class="font-bold text-stone-800">SBI ···· 4921 (Aadhaar Seeded)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Verified Documents Checklist -->
+        <div class="space-y-3">
+          <h4 class="font-bold text-xs uppercase tracking-wider text-stone-500">2. OCR-Verified Documents Checklist</h4>
+          <div class="space-y-2">
+            <div class="p-3 rounded-xl bg-white border border-stone-200 flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">✓</span>
+                <div>
+                  <div class="font-bold text-stone-900">Income Certificate (Valid till May 2027)</div>
+                  <div class="text-[11px] text-stone-500">Govt of NCT Delhi · QR verified</div>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-semibold text-[10px]">Verified</span>
+            </div>
+
+            <div class="p-3 rounded-xl bg-white border border-stone-200 flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">✓</span>
+                <div>
+                  <div class="font-bold text-stone-900">SC Caste Certificate</div>
+                  <div class="text-[11px] text-stone-500">Digital lifetime validity</div>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-semibold text-[10px]">Verified</span>
+            </div>
+
+            <div class="p-3 rounded-xl bg-white border border-stone-200 flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">✓</span>
+                <div>
+                  <div class="font-bold text-stone-900">Class 12 CBSE Marksheet (95.4%)</div>
+                  <div class="text-[11px] text-stone-500">DigiLocker verified hash</div>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-semibold text-[10px]">Verified</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- TinyFish Agent Readiness -->
+        <div class="p-4 rounded-2xl bg-stone-900 text-white text-xs font-mono space-y-2">
+          <div class="flex items-center justify-between text-emerald-400">
+            <span>🐟 TinyFish Agent Readiness:</span>
+            <span>Target: aicte-india.org</span>
+          </div>
+          <div class="text-stone-300">
+            &gt; Session cookies verified. Form inputs mapped. Awaiting your signature to submit.
+          </div>
+        </div>
+
+        <!-- Explicit User Confirmation Checkbox -->
+        <div class="p-4 rounded-2xl bg-stone-100 border border-stone-200 space-y-3">
+          <label class="flex items-start gap-3 cursor-pointer">
+            <input type="checkbox" id="check-confirm-submission" class="w-5 h-5 mt-0.5 rounded text-forest-700 focus:ring-forest-500">
+            <span class="text-xs font-bold text-stone-800 leading-snug">
+              I have inspected all pre-filled details, document scans, and eligibility criteria. I explicitly authorize SchemeSaathi's TinyAgent to complete this submission on my behalf.
+            </span>
+          </label>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-6 border-t border-stone-100 bg-stone-50 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <button onclick="closeAutoApplyModal()" class="text-xs font-bold text-stone-500 hover:text-stone-800 px-4 py-2">
+          Cancel & Edit Profile
+        </button>
+
+        <button id="btn-confirm-apply" onclick="executeSafeSubmission()" 
+          class="btn-forest px-6 py-3 text-xs sm:text-sm font-bold w-full sm:w-auto flex items-center justify-center gap-2 shadow-md">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+          <span data-i18n="confirmSubmitBtn">Confirm & Authorize TinyAgent</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MODAL: MY APPLICATIONS LIFECYCLE TRACKER -->
+  <!-- ========================================== -->
+  <div id="modal-tracker" class="fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-xl w-full max-h-[85vh] overflow-y-auto shadow-2xl border border-stone-200 p-6 space-y-6">
+      <div class="flex items-center justify-between border-b border-stone-100 pb-4">
+        <div>
+          <h3 class="text-lg font-bold text-stone-900">Application Lifecycle Tracker</h3>
+          <p class="text-xs text-stone-500">Live multi-stage verification status from central portals</p>
+        </div>
+        <button onclick="closeTrackerModal()" class="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center font-bold text-stone-600">✕</button>
+      </div>
+
+      <div id="tracker-content" class="space-y-4">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- FLOATING SAATHI MULTILINGUAL AI COPILOT -->
+  <!-- ========================================== -->
+  <div id="saathi-chat-drawer" class="fixed bottom-6 right-6 z-50 w-96 max-w-[calc(100vw-3rem)] rounded-3xl bg-white shadow-2xl border border-stone-200 hidden flex-col overflow-hidden transition-all duration-300">
+    <!-- Chat Header -->
+    <div class="p-4 bg-forest-900 text-white flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-full bg-amber-400 text-forest-950 flex items-center justify-center font-bold text-xs">
+          ✨
+        </div>
+        <div>
+          <h4 class="font-bold text-xs">Saathi RAG Copilot</h4>
+          <span class="text-[10px] text-forest-300 flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Verified Official Scheme Content
+          </span>
+        </div>
+      </div>
+      <button onclick="toggleSaathiChat()" class="text-stone-300 hover:text-white text-sm font-bold">✕</button>
+    </div>
+
+    <!-- Messages Container -->
+    <div id="chat-messages-container" class="p-4 space-y-3 h-72 overflow-y-auto bg-stone-50/70 text-xs">
+      <div class="p-3 rounded-2xl bg-white border border-stone-200 space-y-1">
+        <p class="text-stone-800 leading-relaxed">
+          Namaste! I am your SchemeSaathi AI Copilot. Ask me anything about scholarship eligibility, documents, or how TinyFish safely auto-applies.
+        </p>
+      </div>
+    </div>
+
+    <!-- Quick Prompt Chips -->
+    <div class="px-4 py-2 bg-stone-100/90 border-t border-stone-200 flex items-center gap-1.5 overflow-x-auto text-[10px] font-semibold text-stone-700">
+      <button onclick="sendQuickChatMessage('Am I eligible for AICTE Pragati?')" class="px-2.5 py-1 rounded-full bg-white border border-stone-200 hover:bg-stone-50 whitespace-nowrap">
+        Pragati rules?
+      </button>
+      <button onclick="sendQuickChatMessage('How does TinyFish keep my data safe?')" class="px-2.5 py-1 rounded-full bg-white border border-stone-200 hover:bg-stone-50 whitespace-nowrap">
+        TinyFish Safety?
+      </button>
+      <button onclick="sendQuickChatMessage('Explain in Hindi')" class="px-2.5 py-1 rounded-full bg-white border border-stone-200 hover:bg-stone-50 whitespace-nowrap">
+        हिन्दी में समझाएं
+      </button>
+    </div>
+
+    <!-- Chat Input Form -->
+    <form onsubmit="event.preventDefault(); handleSendChatMessage();" class="p-3 bg-white border-t border-stone-200 flex items-center gap-2">
+      <input type="text" id="chat-input" placeholder="Type a question..." 
+        class="flex-1 px-3 py-2 text-xs bg-stone-50 border border-stone-200 rounded-xl focus:bg-white transition-all font-medium">
+      <button type="submit" class="btn-forest px-3 py-2 rounded-xl text-xs font-bold">
+        Send
+      </button>
+    </form>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="mt-20 border-t border-stone-200 bg-[#FAF7F2] py-12 text-stone-600">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xl font-bold text-forest-950 font-serif-soft">SchemeSaathi</span>
+            <span class="text-xs text-stone-400">·</span>
+            <span class="text-xs font-semibold text-terracotta-700">Team CodeRush</span>
+          </div>
+          <p class="text-xs text-stone-500 mt-1 max-w-md">
+            National AI benefit-access infrastructure built for Kritical Hacks 2026. Free for all Indian students and families.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-6 text-xs font-semibold text-stone-600">
+          <a href="#" onclick="switchView('student')" class="hover:text-forest-800 transition-colors">Scholarship Finder</a>
+          <a href="#" onclick="switchView('tinyfish')" class="hover:text-forest-800 transition-colors">TinyFish Live Radar</a>
+          <a href="#" onclick="switchView('economics')" class="hover:text-forest-800 transition-colors">Economics & Pricing</a>
+          <a href="#" onclick="switchView('counselor')" class="hover:text-forest-800 transition-colors">School Copilot</a>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-stone-200/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-stone-500">
+        <p>© 2026 SchemeSaathi · Kritical Hacks 2026 · DPDP Act 2023 Compliant · Zero Silent Auto-Submit</p>
+        <p>Powered by Deterministic AI, TinyFish Agent APIs & DigiLocker Digital Rails</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT LOGIC ATTACHMENT -->
+  <script src="app.js"></script>
+
+  <!-- INLINE BINDING & CONTROLLER SCRIPT -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Initialize matching with default profile
+      triggerSchemeSearch();
+      calculateEconomics();
+    });
+
+    // VIEW SWITCHER
+    function switchView(viewName) {
+      AppState.currentView = viewName;
+      ['student', 'tinyfish', 'counselor', 'economics'].forEach(v => {
+        const sec = document.getElementById(`view-${v}`);
+        const btn = document.getElementById(`nav-btn-${v}`);
+        if (v === viewName) {
+          if (sec) sec.classList.remove('hidden');
+          if (btn) {
+            btn.classList.add('bg-white', 'text-forest-800', 'shadow-sm');
+            btn.classList.remove('hover:text-stone-900');
+          }
+        } else {
+          if (sec) sec.classList.add('hidden');
+          if (btn) {
+            btn.classList.remove('bg-white', 'text-forest-800', 'shadow-sm');
+            btn.classList.add('hover:text-stone-900');
+          }
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // LANGUAGE SWITCHER
+    function changeLanguage(lang) {
+      AppState.currentLang = lang;
+      const dict = TRANSLATIONS[lang] || TRANSLATIONS.en;
+
+      // Update data-i18n items
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) {
+          el.innerText = dict[key];
+        }
+      });
+
+      const nlPrompt = document.getElementById('nl-prompt');
+      if (nlPrompt && dict.promptPlaceholder) {
+        nlPrompt.placeholder = dict.promptPlaceholder;
+      }
+
+      // Re-render schemes with localized labels
+      renderSchemes();
+    }
+
+    // SEARCH & MATCH TRIGGER
+    function triggerSchemeSearch() {
+      // Read current form inputs
+      AppState.profile.fullName = document.getElementById('input-fullname').value || "Student";
+      AppState.profile.courseLevel = document.getElementById('input-course').value;
+      AppState.profile.state = document.getElementById('input-state').value;
+      AppState.profile.category = document.getElementById('input-category').value;
+      AppState.profile.gender = document.getElementById('input-gender').value;
+      AppState.profile.income = parseInt(document.getElementById('input-income').value, 10) || 400000;
+      AppState.profile.marks = parseFloat(document.getElementById('input-marks').value) || 95;
+      AppState.profile.singleGirl = document.getElementById('check-single-girl').checked;
+      AppState.profile.firstGen = document.getElementById('check-first-gen').checked;
+
+      // Execute ML ranker
+      const results = rankSchemes(AppState.profile);
+
+      // Update match stats subtitle
+      const sub = document.getElementById('match-stats-sub');
+      if (sub) {
+        sub.innerText = `${results.checkedCount} schemes checked · ${results.matchedCount} matched. Sorted by fit, benefit and deadline.`;
+      }
+
+      renderSchemes();
+    }
+
+    // RENDER SCHEMES MATCH CARDS (Directly replicating Slide prototype!)
+    function renderSchemes(filter = 'all') {
+      const container = document.getElementById('schemes-list');
+      if (!container) return;
+
+      let list = AppState.matchedSchemes || [];
+      if (filter === 'central') {
+        list = list.filter(s => s.provider.includes("Ministry") || s.provider.includes("NSP") || s.provider.includes("AICTE"));
+      } else if (filter === 'state') {
+        list = list.filter(s => s.provider.includes("State"));
+      } else if (filter === 'urgent') {
+        list = list.filter(s => s.deadline.includes("2026-10-24") || s.deadline.includes("2026-11-06"));
+      }
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="soft-card p-8 text-center text-stone-500 bg-white">
+            <p class="font-bold text-stone-800">No schemes matched these specific filters.</p>
+            <p class="text-xs mt-1">Try adjusting the family income ceiling or academic marks in the profile above.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = list.map((scheme, index) => {
+        const isFirst = index === 0;
+        return `
+          <div class="soft-card p-6 bg-white border border-stone-200/90 rounded-2xl space-y-4 hover:border-forest-600 transition-all">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="text-lg font-bold text-stone-900">${index + 1}. ${scheme.name}</h3>
+                  ${isFirst ? `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#C89138] text-white">Apply first</span>` : ''}
+                </div>
+                <p class="text-xs text-stone-500 font-medium mt-0.5">
+                  <span class="underline decoration-stone-300">${scheme.portalDomain}</span> · Benefit: <strong class="text-stone-800 font-bold">${scheme.benefitDisplay}</strong>
+                </p>
+              </div>
+
+              <!-- Badges Row -->
+              <div class="flex items-center gap-2 text-xs">
+                <span class="px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 font-semibold">
+                  Deadline: ${scheme.deadlineDisplay}
+                </span>
+                <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-forest-700 border border-forest-200 font-bold">
+                  Fit ${scheme.fitScore}%
+                </span>
+              </div>
+            </div>
+
+            <!-- Progress Bar representing fit / completion readiness -->
+            <div class="w-full bg-stone-100 h-2.5 rounded-full overflow-hidden">
+              <div class="h-full bg-forest-700 rounded-full transition-all duration-700" style="width: ${scheme.fitScore}%"></div>
+            </div>
+
+            <!-- Action button & official link -->
+            <div class="flex items-center justify-between pt-1">
+              <button onclick="openAutoApplyModal('${scheme.id}')" class="btn-forest px-5 py-2.5 text-xs sm:text-sm font-bold flex items-center gap-2 shadow-sm">
+                <span>Review and apply</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+              </button>
+
+              <button onclick="speakSchemeDetails('${scheme.id}')" class="text-xs text-stone-500 hover:text-stone-800 flex items-center gap-1 font-semibold p-1.5 rounded-lg hover:bg-stone-100">
+                <svg class="w-4 h-4 text-forest-700" fill="currentColor" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                <span>Listen</span>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function filterSchemes(filterType) {
+      renderSchemes(filterType);
+    }
+
+    // NATURAL LANGUAGE AUTO-EXTRACT
+    function handleAutoExtractNLP() {
+      const promptEl = document.getElementById('nl-prompt');
+      const text = promptEl.value;
+      if (!text.trim()) {
+        alert("Please enter a sentence describing yourself first!");
+        return;
+      }
+
+      const updates = parseNaturalLanguageQuery(text);
+
+      if (updates.gender) document.getElementById('input-gender').value = updates.gender;
+      if (updates.courseLevel) document.getElementById('input-course').value = updates.courseLevel;
+      if (updates.state) document.getElementById('input-state').value = updates.state;
+      if (updates.category) document.getElementById('input-category').value = updates.category;
+      if (updates.income) document.getElementById('input-income').value = updates.income;
+      if (updates.marks) document.getElementById('input-marks').value = updates.marks;
+
+      triggerSchemeSearch();
+    }
+
+    // PRESET QUERY CHIPS
+    function setPresetQuery(type) {
+      const promptEl = document.getElementById('nl-prompt');
+      if (type === 'girl-btech-sc') {
+        promptEl.value = "I am a girl in B.Tech, SC category, family income 2 lakh, 85% marks from Delhi";
+      } else if (type === 'diploma-obc') {
+        promptEl.value = "I am an OBC student doing Diploma in Engineering from Uttar Pradesh with 75% marks and 2.5 lakh income";
+      } else if (type === 'minority-girl') {
+        promptEl.value = "I am a minority girl student in Delhi Class 12 with 88% marks and family income 1.8 lakh";
+      }
+      handleAutoExtractNLP();
+    }
+
+    // VOICE RECOGNITION SETUP
+    let recognitionInstance = null;
+    function toggleVoiceInput() {
+      const voiceBtn = document.getElementById('btn-voice-input');
+      const voiceLabel = document.getElementById('voice-label');
+
+      if (!recognitionInstance) {
+        recognitionInstance = setupSpeechRecognition(
+          (text) => {
+            document.getElementById('nl-prompt').value = text;
+            handleAutoExtractNLP();
+          },
+          (isListening) => {
+            if (isListening) {
+              voiceBtn.classList.add('listening-active');
+              voiceLabel.innerText = "Listening...";
+            } else {
+              voiceBtn.classList.remove('listening-active');
+              voiceLabel.innerText = "Speak";
+            }
+          }
+        );
+      }
+
+      if (recognitionInstance) {
+        try {
+          recognitionInstance.start();
+        } catch (e) {
+          recognitionInstance.stop();
+        }
+      } else {
+        // Fallback simulation if speech recognition is not supported in the environment
+        const simulatedTexts = [
+          "I am a girl in B.Tech, SC category, family income 2 lakh, 85% marks from Delhi",
+          "OBC Diploma student from Uttar Pradesh, 75% marks, family income 2.5 lakh"
+        ];
+        const chosen = simulatedTexts[Math.floor(Math.random() * simulatedTexts.length)];
+        document.getElementById('nl-prompt').value = chosen;
+        handleAutoExtractNLP();
+      }
+    }
+
+    function speakSchemeDetails(schemeId) {
+      const scheme = SCHEMES_DB.find(s => s.id === schemeId);
+      if (!scheme) return;
+      speakText(`${scheme.name}. Benefit: ${scheme.benefitDisplay}. Deadline is ${scheme.deadlineDisplay}.`);
+    }
+
+    // SAFE AUTO-APPLY MODAL
+    function openAutoApplyModal(schemeId) {
+      const scheme = SCHEMES_DB.find(s => s.id === schemeId);
+      if (!scheme) return;
+      AppState.selectedSchemeForApply = scheme;
+
+      document.getElementById('modal-scheme-title').innerText = scheme.name;
+      document.getElementById('modal-field-name').innerText = AppState.profile.fullName;
+      document.getElementById('modal-field-category').innerText = AppState.profile.category;
+      document.getElementById('modal-field-income').innerText = `₹${AppState.profile.income.toLocaleString('en-IN')} / yr`;
+      document.getElementById('modal-field-course').innerText = AppState.profile.courseLevel;
+      document.getElementById('modal-field-marks').innerText = `${AppState.profile.marks}%`;
+      document.getElementById('check-confirm-submission').checked = false;
+
+      document.getElementById('modal-auto-apply').classList.remove('hidden');
+    }
+
+    function closeAutoApplyModal() {
+      document.getElementById('modal-auto-apply').classList.add('hidden');
+    }
+
+    function executeSafeSubmission() {
+      const checkbox = document.getElementById('check-confirm-submission');
+      if (!checkbox.checked) {
+        alert("Please confirm the explicit authorization checkbox before submission!");
+        return;
+      }
+
+      const scheme = AppState.selectedSchemeForApply;
+      const newApp = {
+        id: `APP-2026-${Math.floor(1000 + Math.random() * 9000)}`,
+        schemeId: scheme.id,
+        schemeName: scheme.name,
+        studentName: AppState.profile.fullName,
+        submittedAt: "Just now",
+        status: "Submitted to Portal",
+        stages: [
+          { label: "Form Pre-fill", status: "completed", date: "Today" },
+          { label: "Explicit User Approval", status: "completed", date: "Today" },
+          { label: "Institute Verification", status: "current", date: "In progress" },
+          { label: "District Welfare Officer", status: "pending", date: "Upcoming" },
+          { label: "State Directorate Approval", status: "pending", date: "Upcoming" },
+          { label: "DBT Direct Bank Disbursal", status: "pending", date: "Upcoming" }
+        ],
+        benefit: scheme.benefitDisplay,
+        trackingRef: `TINY-${scheme.portalDomain.toUpperCase()}-2026`
+      };
+
+      AppState.submittedApplications.unshift(newApp);
+      document.getElementById('applied-count-badge').innerText = AppState.submittedApplications.length;
+
+      closeAutoApplyModal();
+      alert(`🎉 Application successfully dispatched via TinyFish Agent!\n\nTracking ID: ${newApp.id}\nScheme: ${scheme.name}\n\nYou will receive real-time verification alerts on WhatsApp.`);
+      openApplicationsModal();
+    }
+
+    // APPLICATIONS TRACKER MODAL
+    function openApplicationsModal() {
+      const container = document.getElementById('tracker-content');
+      if (AppState.submittedApplications.length === 0) {
+        container.innerHTML = `<p class="text-xs text-stone-500">No applications submitted yet.</p>`;
+      } else {
+        container.innerHTML = AppState.submittedApplications.map(app => `
+          <div class="p-4 rounded-2xl bg-stone-50 border border-stone-200 space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-[10px] font-mono text-stone-400">ID: ${app.id}</span>
+                <h4 class="font-bold text-sm text-stone-900">${app.schemeName}</h4>
+              </div>
+              <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-100 text-forest-800">
+                ${app.status}
+              </span>
+            </div>
+
+            <!-- Stages Timeline -->
+            <div class="space-y-2 pt-2 border-t border-stone-200/60 text-xs">
+              ${app.stages.map(st => `
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] ${
+                      st.status === 'completed' ? 'bg-emerald-600 text-white' : 
+                      st.status === 'current' ? 'bg-amber-400 text-stone-900 animate-pulse' : 'bg-stone-200 text-stone-400'
+                    }">
+                      ${st.status === 'completed' ? '✓' : '•'}
+                    </span>
+                    <span class="${st.status === 'current' ? 'font-bold text-stone-900' : 'text-stone-600'}">${st.label}</span>
+                  </div>
+                  <span class="text-[11px] text-stone-400 font-mono">${st.date}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      document.getElementById('modal-tracker').classList.remove('hidden');
+    }
+
+    function closeTrackerModal() {
+      document.getElementById('modal-tracker').classList.add('hidden');
+    }
+
+    // TINYFISH SIMULATION RUNNER
+    function runTinyFishSimulation() {
+      const btn = document.getElementById('btn-run-tinyfish');
+      const logContainer = document.getElementById('tinyfish-console-logs');
+      const stepCounter = document.getElementById('tf-step-counter');
+      const costCounter = document.getElementById('tf-cost-counter');
+
+      btn.disabled = true;
+      btn.innerText = "Running Probe...";
+      logContainer.innerHTML = '';
+
+      const sampleScheme = SCHEMES_DB[0];
+
+      TinyFishEngine.startLiveProbe(
+        sampleScheme,
+        (step, index, total) => {
+          stepCounter.innerText = index * 6;
+          costCounter.innerText = `$${(index * 0.106).toFixed(2)} (₹${(index * 9.2).toFixed(2)})`;
+
+          const logEl = document.createElement('div');
+          logEl.className = 'p-2 rounded bg-stone-950/60 border border-stone-800 space-y-1 animate-fadeIn';
+          logEl.innerHTML = `
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="text-amber-400 font-bold">[${step.service}] ${step.title}</span>
+              <span class="text-stone-500 font-mono">${step.cost}</span>
+            </div>
+            <div class="text-stone-300">${step.action}</div>
+            <div class="text-emerald-400/90 text-[11px]">${step.detail}</div>
+          `;
+          logContainer.appendChild(logEl);
+          logContainer.scrollTop = logContainer.scrollHeight;
+        },
+        () => {
+          btn.disabled = false;
+          btn.innerText = "Run Live TinyFish Portal Probe";
+          const finalNotice = document.createElement('div');
+          finalNotice.className = 'p-2.5 rounded bg-emerald-950/70 border border-emerald-800 text-emerald-300 font-bold text-center mt-2';
+          finalNotice.innerText = "✓ TinyFish Execution Paused safely at user review checkpoint.";
+          logContainer.appendChild(finalNotice);
+        }
+      );
+    }
+
+    // CALCULATE ECONOMICS & ROI
+    function calculateEconomics() {
+      const students = parseInt(document.getElementById('slider-students').value, 10);
+      const avgBenefit = parseInt(document.getElementById('slider-benefit').value, 10);
+      const rate = parseInt(document.getElementById('slider-rate').value, 10) / 100;
+
+      document.getElementById('slider-students-val').innerText = `${students.toLocaleString('en-IN')} students`;
+      document.getElementById('slider-benefit-val').innerText = `₹${avgBenefit.toLocaleString('en-IN')} / student`;
+      document.getElementById('slider-rate-val').innerText = `${Math.round(rate * 100)}%`;
+
+      const completedCount = Math.round(students * rate);
+      const totalBenefitUnlocked = completedCount * avgBenefit; // in rupees
+      const costPerApp = 145; // average cost in rupees (TinyFish + LLM + OCR + WhatsApp)
+      const totalCost = completedCount * costPerApp;
+      const multiplier = (totalBenefitUnlocked / totalCost).toFixed(1);
+
+      const croresUnlocked = (totalBenefitUnlocked / 10000000).toFixed(1);
+      const lakhsCost = (totalCost / 100000).toFixed(1);
+
+      document.getElementById('eco-total-benefit').innerText = `₹${croresUnlocked} Crore`;
+      document.getElementById('eco-total-cost').innerText = `₹${lakhsCost} Lakh`;
+      document.getElementById('eco-roi-multiplier').innerText = `${multiplier}x return`;
+    }
+
+    // SAATHI AI COPILOT CHAT
+    function toggleSaathiChat() {
+      const drawer = document.getElementById('saathi-chat-drawer');
+      drawer.classList.toggle('hidden');
+    }
+
+    function handleSendChatMessage() {
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+      sendQuickChatMessage(text);
+    }
+
+    function sendQuickChatMessage(question) {
+      const container = document.getElementById('chat-messages-container');
+      
+      // User bubble
+      const userBubble = document.createElement('div');
+      userBubble.className = 'p-2.5 rounded-2xl bg-forest-100 text-forest-900 ml-6 text-right font-medium';
+      userBubble.innerText = question;
+      container.appendChild(userBubble);
+
+      // Copilot response
+      const answer = SaathiRAG.askQuestion(question);
+      const saathiBubble = document.createElement('div');
+      saathiBubble.className = 'p-3 rounded-2xl bg-white border border-stone-200 mr-4 space-y-1.5 shadow-sm';
+      saathiBubble.innerHTML = `
+        <p class="text-stone-800 leading-relaxed font-normal">${answer.text}</p>
+        <div class="pt-1 border-t border-stone-100 text-[10px] text-stone-400 font-mono">
+          Sources: ${answer.citations.join(" · ")}
+        </div>
+      `;
+      container.appendChild(saathiBubble);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function simulateBulkNudge() {
+      alert("📲 WhatsApp notifications successfully triggered for 5 pending students:\n\n• Aman Verma (Class 12 Marksheet pending)\n• Sunita Rawat (Income certificate renewal)\n• 3 students with upcoming 24 Oct deadline.");
+    }
+
+    function showPainPointModal(stepNum) {
+      const descriptions = {
+        1: "Never learns it exists: TinyFish monitors 100+ ministries continuously and alerts users the moment new eligibility rules match their stored profile.",
+        2: "Assumes they don't qualify: SchemeSaathi runs an exact deterministic rule engine that parses formal gazettes so no student wrongfully self-disqualifies.",
+        3: "Misses the deadline: Proactive WhatsApp & SMS nudges alert families 14 days, 7 days, and 48 hours before portals close.",
+        4: "Uploads wrong document: OCR document validator catches expired dates, blurriness, and Aadhaar name mismatches before submission.",
+        5: "Fails later verification: End-to-end status tracker monitors Institute, District Welfare Officer, and State Directorate approvals.",
+        6: "Low digital access: Multilingual voice assistant and assisted school counselor dashboards ensure zero digital literacy barriers."
+      };
+      alert(`Friction Step #${stepNum}:\n\n${descriptions[stepNum]}`);
+    }
+  </script>
+</body>
+</html>

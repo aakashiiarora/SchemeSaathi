@@ -1,0 +1,263 @@
+/* SchemeSaathi - Soft Editorial Styling & Design System
+   Team CodeRush · Kritical Hacks 2026
+*/
+
+:root {
+  --bg-sand: #FAF7F2;
+  --bg-cream: #F5EFEB;
+  --bg-card: #FFFFFF;
+  --text-primary: #1C2421;
+  --text-secondary: #53635B;
+  --text-muted: #7E8F87;
+  --forest-dark: #0D4A32;
+  --forest-primary: #135E41;
+  --forest-light: #EBF5F0;
+  --forest-border: #D1E5DA;
+  --terracotta: #C25E2D;
+  --terracotta-soft: #FBF0EB;
+  --gold-warm: #C89138;
+  --gold-soft: #FBF5E8;
+  --border-soft: #EBE5DB;
+  --border-hover: #D8D0C3;
+  --shadow-soft: 0 10px 30px -10px rgba(19, 94, 65, 0.06), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+  --shadow-hover: 0 16px 40px -12px rgba(19, 94, 65, 0.12), 0 8px 18px -4px rgba(0, 0, 0, 0.05);
+  --radius-soft: 20px;
+  --radius-pill: 9999px;
+}
+
+body {
+  background-color: var(--bg-sand);
+  color: var(--text-primary);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 10% 10%, rgba(235, 245, 240, 0.8) 0%, transparent 40%),
+    radial-gradient(circle at 90% 30%, rgba(251, 240, 235, 0.6) 0%, transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(251, 245, 232, 0.7) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+.font-serif-soft {
+  font-family: 'Newsreader', 'Playfair Display', Georgia, serif;
+}
+
+/* Glassmorphism soft */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(235, 229, 219, 0.8);
+}
+
+.glass-panel-dark {
+  background: rgba(13, 74, 50, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(209, 229, 218, 0.2);
+}
+
+/* Card aesthetics */
+.soft-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-soft);
+  border-radius: var(--radius-soft);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.soft-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+/* Custom Soft Buttons */
+.btn-forest {
+  background-color: var(--forest-primary);
+  color: #FFFFFF;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(19, 94, 65, 0.25);
+}
+
+.btn-forest:hover {
+  background-color: var(--forest-dark);
+  box-shadow: 0 6px 20px rgba(19, 94, 65, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-soft-terracotta {
+  background-color: var(--terracotta-soft);
+  color: var(--terracotta);
+  border: 1px solid rgba(194, 94, 45, 0.2);
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-soft-terracotta:hover {
+  background-color: #f7ded3;
+  color: #a84e20;
+}
+
+.btn-soft-forest {
+  background-color: var(--forest-light);
+  color: var(--forest-primary);
+  border: 1px solid var(--forest-border);
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-soft-forest:hover {
+  background-color: #dceee4;
+  color: var(--forest-dark);
+}
+
+/* Pill badge */
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+}
+
+.badge-forest {
+  background-color: var(--forest-light);
+  color: var(--forest-primary);
+  border: 1px solid var(--forest-border);
+}
+
+.badge-terracotta {
+  background-color: var(--terracotta-soft);
+  color: var(--terracotta);
+  border: 1px solid rgba(194, 94, 45, 0.2);
+}
+
+.badge-gold {
+  background-color: var(--gold-soft);
+  color: var(--gold-warm);
+  border: 1px solid rgba(200, 145, 56, 0.25);
+}
+
+/* Radial pain-points diagram styling */
+.radial-center {
+  background: radial-gradient(circle, #0D4A32 0%, #082F20 100%);
+  color: #FFFFFF;
+  box-shadow: 0 12px 30px rgba(13, 74, 50, 0.35);
+}
+
+.radial-node {
+  background: #FFFFFF;
+  border: 2px dashed #D1C9BE;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.radial-node:hover, .radial-node.active {
+  border-color: var(--forest-primary);
+  border-style: solid;
+  transform: scale(1.04);
+  box-shadow: 0 8px 24px rgba(19, 94, 65, 0.15);
+}
+
+.radial-node.active {
+  background: var(--forest-light);
+}
+
+/* Soft Progress Bar */
+.soft-progress-track {
+  background-color: #E8E2D8;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.soft-progress-fill {
+  background: linear-gradient(90deg, #135E41 0%, #1D8A60 100%);
+  border-radius: var(--radius-pill);
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Pulse animation for voice and live indicators */
+@keyframes softPulse {
+  0% { transform: scale(0.98); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(0.98); opacity: 0.8; }
+}
+
+.pulse-soft {
+  animation: softPulse 2s infinite ease-in-out;
+}
+
+@keyframes listeningWave {
+  0% { box-shadow: 0 0 0 0 rgba(19, 94, 65, 0.4); }
+  70% { box-shadow: 0 0 0 14px rgba(19, 94, 65, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(19, 94, 65, 0); }
+}
+
+.listening-active {
+  animation: listeningWave 1.4s infinite;
+  background-color: var(--forest-primary) !important;
+  color: #FFFFFF !important;
+}
+
+/* Terminal / Code stream for TinyFish */
+.tinyfish-console {
+  background: #111A16;
+  color: #79E2A6;
+  font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+  font-size: 0.825rem;
+  border: 1px solid #1E382B;
+  border-radius: 14px;
+}
+
+.tinyfish-console::-webkit-scrollbar {
+  width: 6px;
+}
+.tinyfish-console::-webkit-scrollbar-thumb {
+  background: #254737;
+  border-radius: 4px;
+}
+
+/* Slider custom styling */
+input[type="range"] {
+  accent-color: var(--forest-primary);
+}
+
+/* Soft Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F3ECE2;
+}
+::-webkit-scrollbar-thumb {
+  background: #CFC5B6;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B3A897;
+}
+
+/* Focus outlines */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--forest-primary);
+  box-shadow: 0 0 0 3px rgba(19, 94, 65, 0.15);
+}
+
+/* Shimmer animation for loading states */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer-loader {
+  background: linear-gradient(90deg, #f0eae1 25%, #fbf8f3 50%, #f0eae1 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
